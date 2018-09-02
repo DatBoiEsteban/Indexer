@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FileTxt {
+public class FileTxt extends File{
 
 	private BufferedReader br;
 	Map<String, Integer> dict = new HashMap<String, Integer>();
@@ -21,7 +21,7 @@ public class FileTxt {
 				String words[] = line.split(" ");
 				for (int i = 0; i < words.length; i++) {
 					if (!dict.containsKey(words[i])) {
-						dict.putIfAbsent(words[i], 1);
+						dict.put(words[i], 1);
 					} else {
 						dict.replace(words[i], dict.get(words[i]), dict.get(words[i]) + 1);
 					}

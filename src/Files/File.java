@@ -1,6 +1,8 @@
 package Files;
 
-public class File {
+import java.util.Map;
+
+public abstract class File {
 	private String Name;
 	private String Route;
 	
@@ -16,6 +18,6 @@ public class File {
 	public void setRoute(String pRoute) {
 		Route = pRoute;
 	}
-	
+	public abstract Map<String, Integer> parse(File file);
 
 }
