@@ -1,4 +1,4 @@
-package Files;
+package fileManager;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,27 +13,22 @@ public class FileTxt extends File{
 	Map<String, Integer> dict = new HashMap<String, Integer>();
 
 	@Override
-	public Map<String, Integer> parse(File file) {
+	public Map<String, Integer> parse(String file) {
 		String line = null;
 		try {
-			FileReader fr = new FileReader(file.getRoute());
+			FileReader fr = new FileReader(file);
 			br = new BufferedReader(fr);
+			String Txt = br.readLine();
 			while ((line = br.readLine()) != null) {
-				String words[] = line.split(" ");
-				for (int i = 0; i < words.length; i++) {
-					if (!dict.containsKey(words[i])) {
-						dict.put(words[i], 1);
-					} else {
-						dict.replace(words[i], dict.get(words[i]), dict.get(words[i]) + 1);
-					}
-				}
+				Txt = Txt + line;
 			}
+			dict = super.filDict(Txt);
 			br.close();
 		} catch (FileNotFoundException ex) {
-			System.out.println("Unable to open file '" + file.getName() + "'");
+			System.out.println("Unable to open file '" + file + "'");
 
 		} catch (IOException ex) {
-			System.out.println("Error reading file '" + file.getName() + "'");
+			System.out.println("Error reading file '" + file + "'");
 			// Or we could just do this:
 			// ex.printStackTrace();
 		}
