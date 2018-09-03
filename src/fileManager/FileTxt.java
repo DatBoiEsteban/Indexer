@@ -12,6 +12,7 @@ public class FileTxt extends File{
 	private BufferedReader br;
 	Map<String, Integer> dict = new HashMap<String, Integer>();
 
+	@Override
 	public Map<String, Integer> parse(File file) {
 		String line = null;
 		try {
@@ -27,9 +28,10 @@ public class FileTxt extends File{
 					}
 				}
 			}
+			br.close();
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + file.getName() + "'");
-			
+
 		} catch (IOException ex) {
 			System.out.println("Error reading file '" + file.getName() + "'");
 			// Or we could just do this:

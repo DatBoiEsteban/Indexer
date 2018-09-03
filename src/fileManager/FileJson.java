@@ -2,12 +2,14 @@ package Files;
 
 import java.util.Map;
 
-public class FileHtml extends File {
+public class FileJson extends File {
 
 	@Override
-	public Map parse(String pRoute) {
+	public Map<String, Integer> parse(File file) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }
