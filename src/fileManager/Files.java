@@ -6,6 +6,7 @@ import java.util.Map;
 
 public abstract class Files {
 	private File file;
+	private int amount;
 	
 	protected void readFile(String fileName) {
 		file = new File(fileName);
@@ -18,12 +19,16 @@ public abstract class Files {
 	public String getPath() {
 		return file.getPath();
 	}
+	public int getAmount() {
+		return amount;
+	}
 
-	public abstract Map<String, Integer> parse();
+	public abstract void parse();
 
 	public Map<String, Integer> filDict(String text) {
 		Map<String, Integer> dict = new HashMap<String, Integer>();
 		String words[] = text.split(" ");
+		this.amount = words.length;
 		for (int i = 0; i < words.length; i++) {
 			if (!dict.containsKey(words[i])) {
 				dict.put(words[i], 1);

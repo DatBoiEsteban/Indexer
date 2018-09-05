@@ -8,14 +8,14 @@ public class Console {
 
 	public static void main(String[] args) {
 		FileHtml df = new FileHtml("untitled.html");
-		Map<String, Integer> d = df.parse();
-		System.out.println(d.toString());
+		df.parse();
+		System.out.println(df.toString());
 		FileTxt dgg = new FileTxt("untitled.txt");
-		Map<String, Integer> dcc = dgg.parse();
-		System.out.println(dcc.toString());
+		dgg.parse();
+		System.out.println(dgg.toString());
 		FileCSV abc = new FileCSV("untitled.csv");
-		Map<String, Integer> aaa = abc.parse();
-		System.out.println(aaa.toString());
+		abc.parse();
+		System.out.println(abc.toString());
 		FileJson as = new FileJson("settings.json");
 		as.parse();
 	}

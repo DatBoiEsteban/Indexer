@@ -16,7 +16,7 @@ public class FileJson extends Files {
 	}
 
 	@Override
-	public Map<String, Integer> parse() {
+	public void parse() {
 		try {
 			Object obj = parser.parse(new FileReader(super.getName()));
 			JSONObject jsnObj = (JSONObject) obj;
@@ -26,7 +26,6 @@ public class FileJson extends Files {
 			e.printStackTrace();
 		}
 
-		return null;
 	}
 
 }

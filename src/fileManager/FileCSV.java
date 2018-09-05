@@ -10,14 +10,14 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 public class FileCSV extends Files {
-	Map<String, Integer> dict = new HashMap<String, Integer>();
+	private Map<String, Integer> dict = new HashMap<String, Integer>();
 
 	public FileCSV(String fileName) {
 		super.readFile(fileName);
 	}
 
 	@Override
-	public Map<String, Integer> parse() {
+	public void parse() {
 		try {
 			Reader in = new FileReader(super.getName());
 			Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(in);
@@ -28,12 +28,19 @@ public class FileCSV extends Files {
 					column = record.get(i);
 					text = text + " " + column;
 				}
-				dict = super.filDict(text);
+				setDict(super.filDict(text));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Map<String, Integer> getDict() {
 		return dict;
+	}
+
+	public void setDict(Map<String, Integer> dict) {
+		this.dict = dict;
 	}
 
 }
