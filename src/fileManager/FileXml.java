@@ -2,10 +2,10 @@ package fileManager;
 
 import java.util.Map;
 
-public class FileXml extends File {
+public class FileXml extends Files {
 
 	@Override
-	public Map<String, Integer> parse(String file) {
+	public Map<String, Integer> parse() {
 		// TODO Auto-generated method stub
 		return null;
 	}

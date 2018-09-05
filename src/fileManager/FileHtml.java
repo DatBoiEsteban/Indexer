@@ -10,12 +10,16 @@ import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class FileHtml extends File {
+public class FileHtml extends Files {
 Map<String, Integer> dict = new HashMap<String, Integer>();
+
+	public FileHtml(String fileName) {
+		super.readFile(fileName);
+	}
 	@Override
-	public Map<String, Integer> parse(String file) {
+	public Map<String, Integer> parse() {
 		try {
-			FileReader fr = new FileReader(file);
+			FileReader fr = new FileReader(super.getName());
 			BufferedReader br = new BufferedReader(fr);
 			String line = null;
 			String text = br.readLine();
@@ -27,14 +31,20 @@ Map<String, Integer> dict = new HashMap<String, Integer>();
 			dict = super.filDict(html);
 			br.close();
 		} catch (FileNotFoundException ex) {
-			System.out.println("Unable to open file '" + file + "'");
+			System.out.println("Unable to open file '" + super.getName() + "'");
 		} catch (IOException ex) {
-			System.out.println("Error reading file '" + file + "'");
+			System.out.println("Error reading file '" + super.getName() + "'");
 			// Or we could just do this:
 			// ex.printStackTrace();
 		}
 
 		return dict;
+	}
+	public String getName() {
+		return super.getName();
+	}
+	public String getPath() {
+		return super.getPath();
 	}
 
 }
