@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Map;
-
 import fileManager.*;
 
 public class Console {
@@ -18,6 +16,7 @@ public class Console {
 		System.out.println(abc.toString());
 		FileJson as = new FileJson("settings.json");
 		as.parse();
+		System.out.println(as.toString());
 	}
 
 }

@@ -3,14 +3,11 @@ package fileManager;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 public class FileCSV extends Files {
-	private Map<String, Integer> dict = new HashMap<String, Integer>();
 
 	public FileCSV(String fileName) {
 		super.readFile(fileName);
@@ -28,19 +25,11 @@ public class FileCSV extends Files {
 					column = record.get(i);
 					text = text + " " + column;
 				}
-				setDict(super.filDict(text));
+				super.filDict(text);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public Map<String, Integer> getDict() {
-		return dict;
-	}
-
-	public void setDict(Map<String, Integer> dict) {
-		this.dict = dict;
 	}
 
 }
