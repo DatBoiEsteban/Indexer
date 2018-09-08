@@ -7,7 +7,7 @@ import java.io.Reader;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-public class FileCSV extends Files {
+public class FileCSV extends FileFather {
 
 	public FileCSV(String fileName) {
 		super.readFile(fileName);

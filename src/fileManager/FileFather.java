@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Files {
+public abstract class FileFather {
 	private File file;
 	private int amount;
 	private Map<String, Integer> dict = new HashMap<String, Integer>();

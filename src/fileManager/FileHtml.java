@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class FileHtml extends Files {
+public class FileHtml extends FileFather {
 
 	public FileHtml(String fileName) {
 		super.readFile(fileName);

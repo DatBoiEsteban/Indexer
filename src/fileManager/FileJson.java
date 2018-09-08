@@ -7,7 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class FileJson extends Files {
+public class FileJson extends FileFather {
 
 	private JSONArray valuesArr = new JSONArray();
 

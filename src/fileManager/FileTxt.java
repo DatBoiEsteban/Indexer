@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class FileTxt extends Files {
+public class FileTxt extends FileFather {
 
 	public FileTxt(String fileName) {
 		super.readFile(fileName);
