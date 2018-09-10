@@ -27,9 +27,11 @@ public class DirectoryLoader {
 				file.parse();
 				arr.add(file);
 			}
-			/*if(path.contains(extensions[2])) {
-				arr.add(new FileXml(path));
-			}*/
+			if(path.endsWith(extensions[2])) {
+				FileXml file = new FileXml(path);
+				file.parse();
+				arr.add(file);
+			}
 			else if(path.endsWith(extensions[3])) {
 				FileHtml file = new FileHtml(path);
 				file.parse();
@@ -41,9 +43,9 @@ public class DirectoryLoader {
 				arr.add(file);
 			}
 		}
-		for(FileFather as : arr) {
+		/*for(FileFather as : arr) {
 			System.out.println(as.toString());
-		}
+		}*/
 	}
 
 }

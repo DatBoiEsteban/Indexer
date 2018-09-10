@@ -25,7 +25,7 @@ public abstract class FileFather {
 		return amount;
 	}
 
-	private void setDict(Map<String, Integer> pDict) {
+	protected void setDict(Map<String, Integer> pDict) {
 		dict = pDict;
 	}
 
