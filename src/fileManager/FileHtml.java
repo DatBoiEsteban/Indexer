@@ -8,16 +8,16 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class FileHtml extends Files {
+public class FileHtml extends FileFather {
 
-	public FileHtml(String fileName) {
-		super.readFile(fileName);
+	public FileHtml(String filePath) {
+		super.readFile(filePath);
 	}
 
 	@Override
 	public void parse() {
 		try {
-			FileReader fr = new FileReader(super.getName());
+			FileReader fr = new FileReader(super.getPath());
 			BufferedReader br = new BufferedReader(fr);
 			String line = null;
 			String text = br.readLine();
@@ -32,8 +32,6 @@ public class FileHtml extends Files {
 			System.out.println("Unable to open file '" + super.getName() + "'");
 		} catch (IOException ex) {
 			System.out.println("Error reading file '" + super.getName() + "'");
-			// Or we could just do this:
-			// ex.printStackTrace();
 		}
 	}
 

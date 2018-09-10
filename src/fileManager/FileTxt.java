@@ -5,17 +5,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class FileTxt extends Files {
+public class FileTxt extends FileFather {
 
-	public FileTxt(String fileName) {
-		super.readFile(fileName);
+	public FileTxt(String filePath) {
+		super.readFile(filePath);
 	}
 
 	@Override
 	public void parse() {
 		String line = null;
 		try {
-			FileReader fr = new FileReader(super.getName());
+			FileReader fr = new FileReader(super.getPath());
 			BufferedReader br = new BufferedReader(fr);
 			String Txt = br.readLine();
 			while ((line = br.readLine()) != null) {
@@ -28,8 +28,6 @@ public class FileTxt extends Files {
 
 		} catch (IOException ex) {
 			System.out.println("Error reading file '" + super.getName() + "'");
-			// Or we could just do this:
-			// ex.printStackTrace();
 		}
 	}
 }

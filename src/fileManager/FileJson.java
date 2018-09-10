@@ -1,33 +1,47 @@
 package fileManager;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-public class FileJson extends Files {
+public class FileJson extends FileFather {
 
 	private JSONArray valuesArr = new JSONArray();
 
-	public FileJson(String fileName) {
-		super.readFile(fileName);
+	public FileJson(String filePath) {
+		super.readFile(filePath);
 	}
 
 	@Override
 	public void parse() {
 		try {
 			JSONParser parser = new JSONParser();
-			JSONObject jsnObj = (JSONObject) parser.parse(new FileReader(super.getName()));
-			getValues(jsnObj);
+			Object jsnObj = parser.parse(new FileReader(super.getPath()));
+			if(isJSONArray(jsnObj)) {
+				getArray((JSONArray) jsnObj);
+			}else {
+				getValues((JSONObject) jsnObj);	
+			}
 			String text = "";
 			for(int i = 0; i < valuesArr.size(); i++) {
-				text += valuesArr.get(i).toString() + " ";
+				if(valuesArr.get(i) != null) {
+					text += valuesArr.get(i).toString() + " ";	
+				}
 			}
 			super.filDict(text);
 
-		} catch (Exception e) {
+		} catch (FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + super.getName() + "'");
+
+		} catch (IOException ex) {
+			System.out.println("Error reading file '" + super.getName() + "'");
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
@@ -35,7 +49,13 @@ public class FileJson extends Files {
 
 	private void getArray(JSONArray arr) {
 		for (int i = 0; i < arr.size(); i++) {
-			getValues((JSONObject)arr.get(i));
+			
+			if(!(arr.get(i) instanceof JSONObject)) {
+				valuesArr.add(arr.get(i));
+			}else {
+				getValues((JSONObject) arr.get(i));	
+			}
+			
 		}
 	}
 
