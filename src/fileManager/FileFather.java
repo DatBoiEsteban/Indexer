@@ -40,7 +40,16 @@ public abstract class FileFather {
 	public abstract void parse();
 
 	public void filDict(String text) {
-		String words[] = text.split(" ");
+		String[] charToDel = {",",".",":",";","-","_","+","*","¿", "?","!", "¡" };
+		String words[] = text.toLowerCase().split(" ");
+		for (String chars : charToDel) {
+			for (int i = 0; i<words.length; i++) {
+				if (words[i].endsWith(chars)) {
+					words[i] = words[i].substring(0, words[i].length()-1);
+				}
+			}
+		}
+
 		this.amount = words.length;
 		for (int i = 0; i < words.length; i++) {
 			if (!dict.containsKey(words[i])) {
@@ -48,6 +57,12 @@ public abstract class FileFather {
 			} else {
 				dict.replace(words[i], dict.get(words[i]), dict.get(words[i]) + 1);
 			}
+		}
+		if (dict.containsKey("\n")) {
+			dict.remove("\n");
+		}
+		if (dict.containsKey("")) {
+			dict.remove("");
 		}
 		setDict(dict);
 
