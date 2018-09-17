@@ -1,13 +1,9 @@
 package IndexSearch;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.math.*;
 
-import fileManager.*;
+import fileManager.FileFather;
 
 public class TfIdf_Indexer implements I_Indexer{
 	private Map<String, Double> Idfdict ;
@@ -22,6 +18,9 @@ public class TfIdf_Indexer implements I_Indexer{
 		WordSet =  WordSetMaker(); 
 		Idfdict = IdfDictMaker();   
 		Index = indexer();
+	}
+	public Object[][] getIndex(){
+		return Index;
 	}
 
 	public ArrayList<FileFather> getFileList() {
