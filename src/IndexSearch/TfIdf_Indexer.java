@@ -1,27 +1,27 @@
 package IndexSearch;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.math.*;
 
-import fileManager.*;
+import fileManager.FileFather;
 
 public class TfIdf_Indexer implements I_Indexer{
 	private Map<String, Double> Idfdict ;
 	private  Set<String> WordSet; 
 	private ArrayList<FileFather> FileList;
-	private  Object Index[][] = new Object[FileList.size()][WordSet.size()+1];
+	private  Object Index[][];
 	
 	//CONSTRUCTOR 
 	public TfIdf_Indexer(ArrayList<FileFather> pFileList) {
 		super();
 		FileList = pFileList;
 		WordSet =  WordSetMaker(); 
-		Idfdict = IdfDictMaker();   
+		Idfdict = IdfDictMaker(); 
+		Index = new Object[FileList.size()][WordSet.size()+1];
 		Index = indexer();
+	}
+	public Object[][] getIndex(){
+		return Index;
 	}
 
 	public ArrayList<FileFather> getFileList() {
@@ -54,10 +54,11 @@ public class TfIdf_Indexer implements I_Indexer{
 			 Map<String, Double> dict = file.getDict();
 			 for (Map.Entry<String, Double> entry: dict.entrySet()) {
 				 String word = entry.getKey();
-				 if (WordSet.contains(word)) continue;
-				 else {
-					 WordSet.add(word); 
+				 if (!(WordSet.contains(word))) {
+					 WordSet.add(word);
 				 }
+					 
+				 
 			 }
 		 }
 		return WordSet;
