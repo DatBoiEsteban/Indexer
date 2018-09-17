@@ -13,13 +13,15 @@ public class TfIdf_Indexer implements I_Indexer{
 	private Map<String, Double> Idfdict ;
 	private  Set<String> WordSet; 
 	private ArrayList<FileFather> FileList;
-
+	private  Object Index[][] = new Object[FileList.size()][WordSet.size()+1];
+	
 	//CONSTRUCTOR 
 	public TfIdf_Indexer(ArrayList<FileFather> pFileList) {
 		super();
 		FileList = pFileList;
 		WordSet =  WordSetMaker(); 
 		Idfdict = IdfDictMaker();   
+		Index = indexer();
 	}
 
 	public ArrayList<FileFather> getFileList() {
@@ -52,7 +54,7 @@ public class TfIdf_Indexer implements I_Indexer{
 			 Map<String, Double> dict = file.getDict();
 			 for (Map.Entry<String, Double> entry: dict.entrySet()) {
 				 String word = entry.getKey();
-				 if (Exists(word)) continue;
+				 if (WordSet.contains(word)) continue;
 				 else {
 					 WordSet.add(word); 
 				 }
@@ -62,18 +64,6 @@ public class TfIdf_Indexer implements I_Indexer{
 		 
 	}
 	
-	public boolean Exists( String pWord) {
-		if (WordSet.isEmpty()) {
-			return false;
-		}
-	    for (String actualWord : WordSet) {
-	        if (pWord == actualWord) {
-	        	return true;
-	        }else continue;
-	     }
-		return false;
-		
-	}
 	
 	public void TfCalculator() {
 		for (FileFather file: FileList) {
@@ -112,10 +102,34 @@ public void TfIdfCalculator() {
 	}
 }
 
+public  Object[] RoadMaker(FileFather pFile) {
+	Map<String, Double> dict = pFile.getDict();
+	Object road[] = new Object[WordSet.size()+1];
+	road[0]= pFile.getPath();
+	 for (String actualWord : WordSet) {
+		 for(int i=1; i<WordSet.size();i++) {
+			 if(dict.containsKey(actualWord)) {
+				 road[i]=dict.get(actualWord);
+			 }else road[i]=0;
+		 }
+	 }
+	 return road;
+	}
 
-@Override
-public void indexer() {
-	// TODO Auto-generated method stub
+
+//@Override
+public Object[][] indexer() {
+	for (FileFather file: FileList) {
+		for(int i=0; i<FileList.size();i++) {
+			Index[i]=RoadMaker(file);
+		}
+	}
+	return Index;
+		 
+	}
+		
+		
 	
-}
+	
+
 }

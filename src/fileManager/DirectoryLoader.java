@@ -43,4 +43,8 @@ public class DirectoryLoader extends Thread {
 		}*/
 	}
 
+	public ArrayList<FileFather> getArr() {
+		return arr;
+	}
+
 }
