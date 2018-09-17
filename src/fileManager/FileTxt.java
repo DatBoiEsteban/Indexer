@@ -19,7 +19,7 @@ public class FileTxt extends FileFather {
 			BufferedReader br = new BufferedReader(fr);
 			String Txt = br.readLine();
 			while ((line = br.readLine()) != null) {
-				Txt = Txt + line;
+				Txt = Txt + " " + line;
 			}
 			super.filDict(Txt);
 			br.close();

@@ -3,7 +3,6 @@ package fileManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -27,15 +26,10 @@ public class FileXml extends FileFather {
 			DocumentBuilder doc = builderFactory.newDocumentBuilder();
 			Document document = doc.parse(new File(super.getPath()));
 			String text = document.getDocumentElement().getTextContent();
-			super.filDict(text);
-			Map<String, Integer> dict = super.getDict();
-			if(dict.containsKey("\n")) {
-				dict.remove("\n");
+			String[] newText = text.split("\n");
+			for(String texto : newText){
+				super.filDict(texto);
 			}
-			if(dict.containsKey("")) {
-				dict.remove("");
-			}
-			super.setDict(dict);
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + super.getName() + "'");
 		} catch (IOException ex) {

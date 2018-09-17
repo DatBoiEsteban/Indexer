@@ -7,7 +7,7 @@ import java.util.Map;
 public abstract class FileFather {
 	private File file;
 	private int amount;
-	private Map<String, Integer> dict = new HashMap<String, Integer>();
+	private Map<String, Double> dict = new HashMap<String, Double>();
 
 	protected void readFile(String filePath) {
 		file = new File(filePath);
@@ -25,12 +25,12 @@ public abstract class FileFather {
 		return amount;
 	}
 
-	protected void setDict(Map<String, Integer> pDict) {
-		dict = pDict;
+	public Map<String, Double> getDict() {
+		return dict;
 	}
 
-	public Map<String, Integer> getDict() {
-		return dict;
+	protected void setDict(Map<String, Double> dict) {
+		this.dict = dict;
 	}
 
 	public String toString() {
@@ -40,14 +40,29 @@ public abstract class FileFather {
 	public abstract void parse();
 
 	public void filDict(String text) {
-		String words[] = text.split(" ");
+		String[] charToDel = {",",".",":",";","-","_","+","*","¿", "?","!", "¡" };
+		String words[] = text.toLowerCase().split(" ");
+		for (String chars : charToDel) {
+			for (int i = 0; i<words.length; i++) {
+				if (words[i].endsWith(chars)) {
+					words[i] = words[i].substring(0, words[i].length()-1);
+				}
+			}
+		}
+
 		this.amount = words.length;
 		for (int i = 0; i < words.length; i++) {
 			if (!dict.containsKey(words[i])) {
-				dict.put(words[i], 1);
+				dict.put(words[i], (double) 1);
 			} else {
 				dict.replace(words[i], dict.get(words[i]), dict.get(words[i]) + 1);
 			}
+		}
+		if (dict.containsKey("\n")) {
+			dict.remove("\n");
+		}
+		if (dict.containsKey("")) {
+			dict.remove("");
 		}
 		setDict(dict);
 
