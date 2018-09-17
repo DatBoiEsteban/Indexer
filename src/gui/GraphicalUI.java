@@ -3,7 +3,6 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +10,7 @@ import javax.swing.JTextField;
 
 import constants.IGuiConsts;
 import fileManager.DirectoryLoader;
+import IndexSearch.*;
 
 public class GraphicalUI extends JFrame implements IGuiConsts {
 	/**
@@ -22,6 +22,7 @@ public class GraphicalUI extends JFrame implements IGuiConsts {
 	private JButton SearchButton;
 	private JTextField SearchText;
 	private DirectoryLoader DL;
+	private TfIdf_Indexer TFIDF;
 
 	public GraphicalUI() {
 		FilePathPopUp fp =new FilePathPopUp();
@@ -34,7 +35,15 @@ public class GraphicalUI extends JFrame implements IGuiConsts {
 
 		initComponents();
 		this.setVisible(true);
-		DL = new DirectoryLoader(fp.getFilePath());
+		this.DL = new DirectoryLoader(fp.getFilePath());
+		this.TFIDF = new TfIdf_Indexer(this.DL.getArr());
+		Object[][] as = TFIDF.getIndex();
+		for(int i = 0; i<as.length; i++) {
+			for(int j = 0; j<as[i].length; j++) {
+				System.out.println(as[i][j].toString());
+			}
+		}
+		
 	}
 
 	private void initComponents() {
