@@ -33,6 +33,7 @@ public class GraphicalUI extends JFrame implements IGuiConsts {
 		this.setLocationRelativeTo(null);
 
 		initComponents();
+		this.setVisible(true);
 		DL = new DirectoryLoader(fp.getFilePath());
 	}
 
@@ -55,7 +56,7 @@ public class GraphicalUI extends JFrame implements IGuiConsts {
 
 		SearchButton.setFont(TEXT_FONT);
 		SearchButton.setForeground(TEXT_COLOR);
-		SearchButton.setText("Search");
+		SearchButton.setText(BUTTON_TEXT);
 		SearchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				SearchButtonActionPerformed(evt);
@@ -63,7 +64,7 @@ public class GraphicalUI extends JFrame implements IGuiConsts {
 		});
 		SearchButton.setBounds(BUTTON_X_LOCATION, BUTTON_Y_LOCATION, BUTTON_WIDTH, BUTTON_HEIGHT);
 
-		BackgroundIMG.setIcon(new ImageIcon("OnePiece.jpeg"));
+		BackgroundIMG.setIcon(WINDOW_BACKGROUND);
 		BackgroundIMG.setBounds(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		
 		this.getContentPane().add(SearchText);

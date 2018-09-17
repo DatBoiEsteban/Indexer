@@ -3,6 +3,8 @@ package constants;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
+
 public interface IGuiConsts {
 	public final int TEXT_FONT_SIZE = 14;
 	public final String TEXT_FONT_NAME = "Tahoma";
@@ -30,11 +32,13 @@ public interface IGuiConsts {
 	public final int WINDOW_HEIGHT = 720;
 	public final int WINDOW_WIDTH = 1280;
 	public final int BORDER = 100;
+	public final ImageIcon WINDOW_BACKGROUND = new ImageIcon("OnePiece.jpeg");
 
 	public final int BUTTON_WIDTH = 100;
 	public final int BUTTON_HEIGHT = 25;
 	public final int BUTTON_X_LOCATION = WINDOW_WIDTH - BORDER - 50;
 	public final int BUTTON_Y_LOCATION = (int) (WINDOW_HEIGHT * HEIGHT_MODIF_SEARCH);
+	public final String BUTTON_TEXT = "Search";
 
 	public final int SEARCHBAR_WIDTH = WINDOW_WIDTH - BORDER - COMPONENT_SEPARATOR - BUTTON_WIDTH-(BUTTON_WIDTH/2);
 	public final int SEARCHBAR_HEIGHT = BUTTON_HEIGHT;
