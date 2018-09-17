@@ -1,11 +1,12 @@
 package main;
 
+import gui.GraphicalUI;
+
 public class IndexerGui {
 
 	public static void main(String[] args) {
-		new IndexerGui();
+		GraphicalUI window = new GraphicalUI();
+		window.setTitle("Log Pose");
+		window.setVisible(true);
 	}
-public IndexerGui() {
-	
-}
 }
