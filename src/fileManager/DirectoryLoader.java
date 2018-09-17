@@ -48,4 +48,8 @@ public class DirectoryLoader {
 		}*/
 	}
 
+	public ArrayList<FileFather> getArr() {
+		return arr;
+	}
+
 }
