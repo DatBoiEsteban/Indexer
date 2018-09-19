@@ -12,7 +12,7 @@ public class TfIdf_Indexer extends Thread implements I_Indexer {
 	private Map<String, Double> Idfdict = new HashMap<String, Double>();
 	private Set<String> WordSet = new HashSet<String>();
 	private ArrayList<FileFather> FileList;
-	private Object Index[][];
+	private Double Index[][];
 	private Boolean finished = false;
 
 	// CONSTRUCTOR
@@ -20,7 +20,7 @@ public class TfIdf_Indexer extends Thread implements I_Indexer {
 		FileList = pFileList;
 	}
 
-	public Object[][] getIndex() {
+	public Double[][] getIndex() {
 		return Index;
 	}
 
