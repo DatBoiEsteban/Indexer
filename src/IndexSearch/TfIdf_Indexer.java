@@ -1,5 +1,7 @@
 package IndexSearch;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,18 +11,21 @@ public class TfIdf_Indexer implements I_Indexer{
 	private Map<String, Double> Idfdict ;
 	private  Set<String> WordSet; 
 	private ArrayList<FileFather> FileList;
-	private  Object Index[][];
+	private  Double Index[][];
 	
 	//CONSTRUCTOR 
 	public TfIdf_Indexer(ArrayList<FileFather> pFileList) {
 		super();
 		FileList = pFileList;
 		WordSet =  WordSetMaker(); 
-		Idfdict = IdfDictMaker(); 
-		Index = new Object[FileList.size()][WordSet.size()+1];
+		Idfdict = IdfDictMaker();
+		idfDict();
+		IdfCalculator();
+		Calculations();
+		Index = new Double[FileList.size()][WordSet.size()];
 		Index = indexer();
 	}
-	public Object[][] getIndex(){
+	public Double[][] getIndex(){
 		return Index;
 	}
 
@@ -43,13 +48,15 @@ public class TfIdf_Indexer implements I_Indexer{
 		WordSet = wordSet;
 	}
 	public Map<String, Double> IdfDictMaker() {
+		Map<String, Double> idfdict = new HashMap<String, Double>();
 		 for (String actualWord : WordSet) {
-			 Idfdict.put(actualWord, (double) 0);
+			 idfdict.put(actualWord, (double) 0);
 		 }
-		return Idfdict;
+		return idfdict;
 	}
 	
 	public Set<String> WordSetMaker() {
+		Set<String> WordSet = new HashSet<String>(); 
 		 for (FileFather file:FileList) {
 			 Map<String, Double> dict = file.getDict();
 			 for (Map.Entry<String, Double> entry: dict.entrySet()) {
@@ -64,15 +71,19 @@ public class TfIdf_Indexer implements I_Indexer{
 		return WordSet;
 		 
 	}
-	
-	
-	public void TfCalculator() {
-		for (FileFather file: FileList) {
-			Map<String, Double> dict = file.getDict();
-			for (Map.Entry<String, Double> doc: dict.entrySet()) {
-				doc.setValue(doc.getValue()/file.getAmount());
-			}
+	public void Calculations() {
+		for (FileFather actualfile: FileList) {
+			Map<String, Double> dict = actualfile.getDict();
+			TfCalculator(dict,actualfile.getAmount());
+			TfIdfCalculator(dict);
 		}
+	}
+	
+	
+	public void TfCalculator(Map<String, Double> pDict, int WordAmount) {
+			for (Map.Entry<String, Double> doc: pDict.entrySet()) {
+				doc.setValue(doc.getValue()/WordAmount);
+			}
 	}
 	
 	public void idfDict() {
@@ -93,39 +104,44 @@ public void IdfCalculator() {
 	}
 }
 
-public void TfIdfCalculator() {
-	for (FileFather file: FileList) {
-		Map<String, Double> dict = file.getDict();
-		for (Map.Entry<String, Double> doc: dict.entrySet()) {
+public void TfIdfCalculator(Map<String, Double> pDict) {
+		for (Map.Entry<String, Double> doc: pDict.entrySet()) {
 			String word= doc.getKey();
-			doc.setValue(doc.getValue()*Idfdict.get(word));
+			if (Idfdict.containsKey(word)) {
+				doc.setValue(doc.getValue()*Idfdict.get(word));
+			}else continue;
 		}
-	}
 }
 
-public  Object[] RoadMaker(FileFather pFile) {
+public  Double[] RoadMaker(FileFather pFile) {
 	Map<String, Double> dict = pFile.getDict();
-	Object road[] = new Object[WordSet.size()+1];
-	road[0]= pFile.getPath();
+	Double road[] = new Double[WordSet.size()];
+	int position = 0; 
+	//road[0]= pFile;
 	 for (String actualWord : WordSet) {
-		 for(int i=1; i<WordSet.size();i++) {
 			 if(dict.containsKey(actualWord)) {
-				 road[i]=dict.get(actualWord);
-			 }else road[i]=0;
-		 }
+				 road[position]=dict.get(actualWord);
+				 position++;
+			 }else {
+				 road[position]=(double) 0;
+				 position++;
+			 }
+			   
+		 
 	 }
 	 return road;
 	}
 
 
 //@Override
-public Object[][] indexer() {
+public Double[][] indexer() {
+	Double[][]index = new Double[FileList.size()][WordSet.size()];
+	int position =0;
 	for (FileFather file: FileList) {
-		for(int i=0; i<FileList.size();i++) {
-			Index[i]=RoadMaker(file);
-		}
+	 index[position]=RoadMaker(file);
+	 position++; 
 	}
-	return Index;
+	return index;
 		 
 	}
 		
