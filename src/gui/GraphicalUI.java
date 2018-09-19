@@ -36,7 +36,8 @@ public class GraphicalUI extends JFrame implements IGuiConsts {
 		initComponents();
 		this.setVisible(true);
 		this.DL = new DirectoryLoader(fp.getFilePath());
-		this.TFIDF = new TfIdf_Indexer(this.DL.getArr());
+		this.TFIDF = TfIdf_Indexer.getInstance(this.DL.getArr()); 
+				//new TfIdf_Indexer(this.DL.getArr()); NO SE NECESITA PORQUE ES SINGLETON 
 		Object[][] as = TFIDF.getIndex();
 		for(int i = 0; i<as.length; i++) {
 			for(int j = 0; j<as[i].length; j++) {
