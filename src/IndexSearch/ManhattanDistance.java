@@ -19,7 +19,6 @@ public class ManhattanDistance implements I_Distance {
 
 
 
-		@Override
 		public Double[] DistanceCalculator(Double[] pDoc, Double[] pQuery) {
 			 Double[] distance = new Double[1];
 			 double Result = 0.0;

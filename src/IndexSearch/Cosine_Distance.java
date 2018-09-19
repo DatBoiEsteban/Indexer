@@ -18,7 +18,6 @@ public class Cosine_Distance implements I_Distance {
 
 
 
-	@Override
 	public Double[] DistanceCalculator(Double[] pDoc, Double[] pQuery) {
 		 Double[] distance = new Double[1];
 		 double dotProduct = 0.0;
